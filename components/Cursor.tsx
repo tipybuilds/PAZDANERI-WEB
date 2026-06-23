@@ -9,8 +9,8 @@ export default function Cursor() {
 
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
-  const springX = useSpring(x, { stiffness: 500, damping: 40, mass: 0.6 });
-  const springY = useSpring(y, { stiffness: 500, damping: 40, mass: 0.6 });
+  const springX = useSpring(x, { stiffness: 1400, damping: 90, mass: 0.2 });
+  const springY = useSpring(y, { stiffness: 1400, damping: 90, mass: 0.2 });
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
