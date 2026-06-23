@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 
 export default function Cursor() {
   const [enabled, setEnabled] = useState(false);
   const [hovering, setHovering] = useState(false);
 
+  // Track the pointer 1:1 (no spring) so the dot is always exactly under
+  // the cursor — never lagging or feeling "stuck".
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
-  const springX = useSpring(x, { stiffness: 1400, damping: 90, mass: 0.2 });
-  const springY = useSpring(y, { stiffness: 1400, damping: 90, mass: 0.2 });
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
@@ -43,17 +43,17 @@ export default function Cursor() {
     <motion.div
       aria-hidden
       className="pointer-events-none fixed left-0 top-0 z-[9999] mix-blend-difference"
-      style={{ x: springX, y: springY }}
+      style={{ x, y }}
     >
       <motion.div
         className="rounded-full bg-white"
         animate={{
-          width: hovering ? 56 : 12,
-          height: hovering ? 56 : 12,
-          x: hovering ? -28 : -6,
-          y: hovering ? -28 : -6,
+          width: hovering ? 48 : 12,
+          height: hovering ? 48 : 12,
+          x: hovering ? -24 : -6,
+          y: hovering ? -24 : -6,
         }}
-        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        transition={{ type: "spring", stiffness: 500, damping: 35, mass: 0.4 }}
       />
     </motion.div>
   );
