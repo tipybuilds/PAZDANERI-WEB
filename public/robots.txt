@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pazdaneri.com/sitemap.xml
