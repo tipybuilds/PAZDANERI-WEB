@@ -1,33 +1,23 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/lib/content";
-import { Reveal, RevealText } from "@/components/Reveal";
+import { RevealText } from "@/components/Reveal";
 
-const gradients = [
-  "linear-gradient(135deg,#c8a96a,#6b4f2a)",
-  "linear-gradient(135deg,#8a9a5b,#384226)",
-  "linear-gradient(135deg,#b6705a,#5a2d24)",
-  "linear-gradient(135deg,#7a8aa0,#2f3a4a)",
-  "linear-gradient(135deg,#c9a26b,#7a5230)",
-  "linear-gradient(135deg,#a06b8a,#43243a)",
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const accents = [
+  "linear-gradient(120deg,#c8a96a,#6b4f2a)",
+  "linear-gradient(120deg,#8a9a5b,#384226)",
+  "linear-gradient(120deg,#b6705a,#5a2d24)",
+  "linear-gradient(120deg,#7a8aa0,#2f3a4a)",
+  "linear-gradient(120deg,#c9a26b,#7a5230)",
+  "linear-gradient(120deg,#a06b8a,#43243a)",
 ];
 
 export default function Projects() {
-  const [active, setActive] = useState<number | null>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 150, damping: 20, mass: 0.5 });
-  const sy = useSpring(y, { stiffness: 150, damping: 20, mass: 0.5 });
-  const wrapRef = useRef<HTMLDivElement>(null);
-
-  function onMove(e: React.MouseEvent) {
-    const rect = wrapRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    x.set(e.clientX - rect.left);
-    y.set(e.clientY - rect.top);
-  }
+  const [open, setOpen] = useState<string | null>(projects[0]?.slug ?? null);
 
   return (
     <section
@@ -38,65 +28,128 @@ export default function Projects() {
         <h2 className="font-serif text-4xl font-light leading-none tracking-tight sm:text-7xl">
           <RevealText text="Proyectos" />
         </h2>
-        <Reveal>
-          <p className="hidden text-sm uppercase tracking-[0.18em] opacity-50 sm:block">
-            Seleccionados
-          </p>
-        </Reveal>
+        <p className="hidden text-sm uppercase tracking-[0.18em] opacity-50 sm:block">
+          Toca para expandir
+        </p>
       </div>
 
-      <div ref={wrapRef} onMouseMove={onMove} className="relative">
-        {/* floating preview */}
-        <AnimatePresence>
-          {active !== null && (
-            <motion.div
-              key="preview"
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.85 }}
-              transition={{ duration: 0.3 }}
-              style={{ x: sx, y: sy, background: gradients[active % gradients.length] }}
-              className="pointer-events-none absolute z-20 hidden h-64 w-80 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl shadow-2xl md:block"
-            >
-              <div className="flex h-full items-center justify-center">
-                <span className="font-serif text-2xl text-white/90">
-                  {projects[active].name}
+      <ul className="border-t border-hair">
+        {projects.map((p, i) => {
+          const isOpen = open === p.slug;
+          return (
+            <li key={p.slug} className="border-b border-hair">
+              <button
+                type="button"
+                onClick={() => setOpen(isOpen ? null : p.slug)}
+                aria-expanded={isOpen}
+                data-cursor-hover
+                className="group flex w-full items-center gap-4 py-7 text-left sm:py-9"
+              >
+                <span className="hidden w-10 shrink-0 font-serif text-sm opacity-40 sm:block">
+                  0{i + 1}
                 </span>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
-        <ul className="border-t border-hair">
-          {projects.map((p, i) => (
-            <li key={p.slug}>
-              <Reveal y={0}>
-                <div
-                  onMouseEnter={() => setActive(i)}
-                  onMouseLeave={() => setActive(null)}
-                  data-cursor-hover
-                  className="group grid grid-cols-12 items-center gap-4 border-b border-hair py-7 transition-colors duration-500 sm:py-10"
-                >
-                  <span className="col-span-1 hidden font-serif text-sm opacity-40 sm:block">
-                    0{i + 1}
+                <span className="flex-1">
+                  <span
+                    className={`block font-serif text-3xl font-light tracking-tight transition-all duration-500 ease-smooth sm:text-5xl ${
+                      isOpen
+                        ? "translate-x-0 text-accent"
+                        : "group-hover:translate-x-3"
+                    }`}
+                  >
+                    {p.name}
                   </span>
-                  <div className="col-span-12 sm:col-span-6">
-                    <h3 className="font-serif text-3xl font-light tracking-tight transition-transform duration-500 group-hover:translate-x-3 sm:text-5xl">
-                      {p.name}
-                    </h3>
-                  </div>
-                  <p className="col-span-12 text-sm opacity-60 sm:col-span-4 sm:text-base">
-                    {p.tagline}
-                  </p>
-                  <span className="col-span-12 text-xs uppercase tracking-[0.16em] opacity-50 sm:col-span-1 sm:text-right">
-                    {p.tag}
-                  </span>
-                </div>
-              </Reveal>
+                </span>
+
+                <span className="hidden shrink-0 text-xs uppercase tracking-[0.16em] opacity-50 md:block">
+                  {p.plan}
+                </span>
+
+                {/* expand indicator */}
+                <span className="relative ml-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-hair">
+                  <span className="absolute h-px w-3.5 bg-[var(--fg)]" />
+                  <motion.span
+                    className="absolute h-px w-3.5 bg-[var(--fg)]"
+                    animate={{ rotate: isOpen ? 0 : 90 }}
+                    transition={{ duration: 0.4, ease }}
+                  />
+                </span>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.6, ease }}
+                    className="overflow-hidden"
+                  >
+                    <div className="grid gap-8 pb-12 sm:grid-cols-12 sm:gap-10 sm:pl-14">
+                      {/* accent panel */}
+                      <motion.div
+                        initial={{ scale: 0.96, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.6, ease, delay: 0.1 }}
+                        className="relative col-span-12 hidden h-56 overflow-hidden rounded-xl sm:col-span-4 sm:block"
+                        style={{ background: accents[i % accents.length] }}
+                      >
+                        <div className="flex h-full items-end p-5">
+                          <span className="font-serif text-xl text-white/90">
+                            {p.name}
+                          </span>
+                        </div>
+                      </motion.div>
+
+                      {/* text */}
+                      <div className="col-span-12 sm:col-span-5">
+                        <p className="text-xs uppercase tracking-[0.18em] opacity-50">
+                          {p.tagline}
+                        </p>
+                        <p className="mt-4 max-w-md text-lg leading-relaxed opacity-80">
+                          {p.description}
+                        </p>
+                        {p.details && (
+                          <p className="mt-4 text-sm italic opacity-60">
+                            {p.details}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* deliverables */}
+                      <div className="col-span-12 sm:col-span-3">
+                        <div className="flex items-center justify-between border-b border-hair pb-2 text-xs uppercase tracking-[0.18em] opacity-50">
+                          <span>{p.plan}</span>
+                          <span>{p.year}</span>
+                        </div>
+                        <ul className="mt-4 space-y-2">
+                          {p.deliverables.map((d, di) => (
+                            <motion.li
+                              key={d}
+                              initial={{ opacity: 0, x: -8 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{
+                                duration: 0.5,
+                                ease,
+                                delay: 0.15 + di * 0.06,
+                              }}
+                              className="flex items-center gap-2 text-sm opacity-80"
+                            >
+                              <span className="text-accent">—</span>
+                              {d}
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </li>
-          ))}
-        </ul>
-      </div>
+          );
+        })}
+      </ul>
     </section>
   );
 }
