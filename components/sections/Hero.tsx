@@ -64,7 +64,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.7 }}
             className="max-w-md text-balance text-base leading-relaxed opacity-80"
           >
-            Hacé crecer tu presencia digital de forma orgánica. Más alcance, más
+            Haz crecer tu presencia digital de forma orgánica. Más alcance, más
             conexión real y un trabajo sostenido que impulsa tus ventas.
           </motion.p>
           <motion.a

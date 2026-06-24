@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Paz Daneri — Gestión estratégica de redes sociales",
     description:
-      "Hacé crecer tu presencia digital de forma orgánica. Estrategia, alcance y conexión real con tu audiencia.",
+      "Haz crecer tu presencia digital de forma orgánica. Estrategia, alcance y conexión real con tu audiencia.",
     url: siteUrl,
     siteName: "Paz Daneri",
     locale: "es_ES",

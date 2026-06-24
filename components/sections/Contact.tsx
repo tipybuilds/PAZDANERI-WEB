@@ -23,11 +23,11 @@ export default function Contact() {
         >
           <h2 className="font-serif text-[clamp(2.5rem,9vw,9rem)] font-light leading-[0.95] tracking-tight">
             <RevealText text="Hablemos." />
-            <span className="mt-2 flex items-center gap-4 text-accent">
-              <span className="inline-block transition-transform duration-500 group-hover:translate-x-4">
+            <span className="mt-3 flex items-center gap-3 text-[clamp(1.1rem,3vw,2.2rem)] leading-none text-accent">
+              <span className="inline-block leading-none transition-transform duration-500 group-hover:translate-x-3">
                 ↗
               </span>
-              <span className="text-[clamp(1.1rem,3vw,2.2rem)] tracking-tight opacity-80 group-hover:opacity-100">
+              <span className="tracking-tight opacity-80 group-hover:opacity-100">
                 {site.email}
               </span>
             </span>
