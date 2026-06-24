@@ -23,10 +23,21 @@ export default function Contact() {
         >
           <h2 className="font-serif text-[clamp(2.5rem,9vw,9rem)] font-light leading-[0.95] tracking-tight">
             <RevealText text="Hablemos." />
-            <span className="mt-3 flex items-center gap-3 text-[clamp(1.1rem,3vw,2.2rem)] leading-none text-accent">
-              <span className="inline-block leading-none transition-transform duration-500 group-hover:translate-x-3">
-                ↗
-              </span>
+            <span className="mt-3 flex items-end gap-2 text-[clamp(1.1rem,3vw,2.2rem)] leading-none text-accent">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden
+                className="h-[1.05em] w-[1.05em] shrink-0 transition-transform duration-500 ease-smooth group-hover:translate-x-1 group-hover:-translate-y-1"
+              >
+                {/* diagonal arrow: tail bottom-left, tip top-right (points up toward the email) */}
+                <line x1="4" y1="20" x2="20" y2="4" />
+                <polyline points="9,4 20,4 20,15" />
+              </svg>
               <span className="tracking-tight opacity-80 group-hover:opacity-100">
                 {site.email}
               </span>
