@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/lib/content";
 import { RevealText } from "@/components/Reveal";
@@ -115,6 +116,15 @@ export default function Projects() {
                             {p.details}
                           </p>
                         )}
+                        <Link
+                          href={`/casos/${p.slug}`}
+                          className="group mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] opacity-70 transition-opacity hover:opacity-100"
+                        >
+                          Ver caso
+                          <span className="transition-transform duration-300 group-hover:translate-x-1">
+                            →
+                          </span>
+                        </Link>
                       </div>
 
                       {/* deliverables */}

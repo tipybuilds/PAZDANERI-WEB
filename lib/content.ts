@@ -1,11 +1,105 @@
 export const site = {
   name: "Paz Daneri",
+  legalName: "María Paz Daneri",
   role: "Publicista · Marketing digital",
   email: "mariapaz.daneri@gmail.com",
   phone: "+569 8132 7043",
   phoneHref: "+56981327043",
   location: "Chile · Remoto",
+  url: "https://pazdaneri.com",
+  areaServed: "Chile",
 };
+
+/**
+ * Palabras clave objetivo (SEO). Foco: gestión de RRSS para PYMES en Chile.
+ */
+export const keywords = [
+  "gestión de redes sociales Chile",
+  "community manager Chile",
+  "social media manager Chile",
+  "agencia de redes sociales PYMES",
+  "marketing digital para PYMES Chile",
+  "manejo de redes sociales para empresas",
+  "gestión de Instagram para negocios",
+  "publicidad en redes sociales Chile",
+  "estrategia de contenido redes sociales",
+  "community manager para emprendedores",
+  "crecimiento orgánico en redes sociales",
+  "Paz Daneri",
+];
+
+/**
+ * Preguntas frecuentes — base para la sección visible y para el schema
+ * FAQPage (AEO/GEO: respuestas que los buscadores y las IA pueden citar).
+ */
+export const faqs = [
+  {
+    q: "¿Qué incluye la gestión de redes sociales para una PYME?",
+    a: "Incluye estrategia de contenido, calendario editorial, diseño y publicación, gestión de comunidad (responder mensajes y comentarios) y reportería mensual de métricas. El objetivo es construir presencia de marca y generar oportunidades de venta de forma sostenida.",
+  },
+  {
+    q: "¿Trabajas con empresas de todo Chile?",
+    a: "Sí. Trabajo de forma remota con marcas, PYMES y emprendedores de todo Chile —Santiago y regiones— y también con clientes del resto de Latinoamérica.",
+  },
+  {
+    q: "¿Cuánto cuesta gestionar las redes sociales de mi negocio?",
+    a: "El valor depende del alcance: cantidad de redes, frecuencia de publicación y si incluye producción de contenido o pauta. Trabajo con planes mensuales (Integral, Plus y Causa) y cotizo a medida según los objetivos de cada marca.",
+  },
+  {
+    q: "¿Qué redes sociales gestionas?",
+    a: "Principalmente Instagram, Facebook y TikTok, junto con la estrategia de contenido que las conecta. Definimos juntos en qué plataformas conviene estar según tu audiencia y rubro.",
+  },
+  {
+    q: "¿En cuánto tiempo se ven resultados?",
+    a: "El crecimiento orgánico es un trabajo de mediano y largo plazo. El orden y la consistencia se notan en semanas; los resultados de alcance y comunidad se consolidan a partir de los 3 a 6 meses de trabajo sostenido.",
+  },
+  {
+    q: "¿Cuál es la diferencia entre crecimiento orgánico y pauta pagada?",
+    a: "El crecimiento orgánico construye comunidad y confianza con contenido de valor, sin pagar por alcance. La pauta acelera la visibilidad con inversión publicitaria. Lo ideal es combinarlos: una base orgánica sólida hace que cada peso invertido en pauta rinda más.",
+  },
+  {
+    q: "¿Cómo empezamos a trabajar juntos?",
+    a: "Conversamos por WhatsApp o correo, reviso tu marca y tus objetivos, y te propongo un plan a medida. Una vez definido, comenzamos con la estrategia y el calendario del primer mes.",
+  },
+];
+
+/**
+ * Planes mensuales. Sin precio fijo público (cotización a medida).
+ */
+export const plans = [
+  {
+    name: "Plan Integral",
+    tagline: "Para marcas que quieren delegar toda su presencia digital.",
+    includes: [
+      "Estrategia de contenido",
+      "Calendario editorial",
+      "Diseño y publicación",
+      "Gestión de comunidad",
+      "Producción de contenido",
+      "Reportería mensual",
+    ],
+  },
+  {
+    name: "Plan Plus",
+    tagline: "Para negocios en crecimiento que necesitan constancia.",
+    includes: [
+      "Plan de contenido mensual",
+      "Diseño de feed",
+      "Gestión de comunidad",
+      "Reportería de métricas",
+    ],
+  },
+  {
+    name: "Plan Causa",
+    tagline: "Para fundaciones y causas sociales.",
+    includes: [
+      "Estrategia de comunicación",
+      "Gestión de comunidad",
+      "Campañas de difusión",
+      "Vocería digital",
+    ],
+  },
+];
 
 export const nav = [
   { label: "Inicio", href: "#inicio" },
@@ -13,6 +107,7 @@ export const nav = [
   { label: "Enfoque", href: "#enfoque" },
   { label: "Clientes", href: "#clientes" },
   { label: "Proyectos", href: "#proyectos" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contacto", href: "#contacto" },
 ];
 
