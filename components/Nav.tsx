@@ -27,16 +27,9 @@ export default function Nav() {
         {/* Blurred backing so the menu never mixes with the content behind it */}
         <div
           aria-hidden
-          className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
+          className={`nav-blur pointer-events-none absolute inset-0 transition-opacity duration-500 ${
             scrolled ? "opacity-100" : "opacity-0"
           }`}
-          style={{
-            backdropFilter: "blur(24px) saturate(1.3)",
-            WebkitBackdropFilter: "blur(24px) saturate(1.3)",
-            background: "color-mix(in srgb, var(--bg) 72%, transparent)",
-            maskImage: "linear-gradient(to bottom, #000 70%, transparent)",
-            WebkitMaskImage: "linear-gradient(to bottom, #000 70%, transparent)",
-          }}
         />
         <div className="relative mx-auto flex max-w-[1600px] items-center justify-between px-5 sm:px-8">
           <a

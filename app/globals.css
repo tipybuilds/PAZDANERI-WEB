@@ -72,3 +72,23 @@ html.lenis body {
     border-color: color-mix(in srgb, var(--fg) 14%, transparent);
   }
 }
+
+/* Blurred backing strip behind the fixed nav.
+   On desktop we use a real backdrop blur; on mobile we swap to a solid
+   background because backdrop-filter on a fixed element repaints every
+   frame during touch scroll and causes visible jank. */
+.nav-blur {
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
+}
+
+@media (max-width: 767px) {
+  .nav-blur {
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

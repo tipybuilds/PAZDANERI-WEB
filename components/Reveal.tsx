@@ -8,7 +8,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export function Reveal({
   children,
   delay = 0,
-  y = 28,
+  y = 20,
   className,
 }: {
   children: ReactNode;
@@ -21,8 +21,8 @@ export function Reveal({
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
-      transition={{ duration: 0.9, ease, delay }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.7, ease, delay }}
     >
       {children}
     </motion.div>
@@ -36,7 +36,7 @@ export function RevealText({
   text,
   className,
   delay = 0,
-  stagger = 0.05,
+  stagger = 0.04,
 }: {
   text: string;
   className?: string;
@@ -55,9 +55,9 @@ export function RevealText({
             className="inline-block"
             initial={{ y: "110%" }}
             whileInView={{ y: "0%" }}
-            viewport={{ once: true, margin: "-8% 0px -8% 0px" }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{
-              duration: 0.8,
+              duration: 0.6,
               ease,
               delay: delay + i * stagger,
             }}
