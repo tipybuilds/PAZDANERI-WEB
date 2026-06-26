@@ -21,8 +21,8 @@ export default function Home() {
         <Enfoque />
         <Clients />
         <Projects />
-        <Faq />
         <Contact />
+        <Faq />
       </main>
       <Footer />
     </>

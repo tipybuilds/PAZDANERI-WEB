@@ -107,8 +107,8 @@ export const nav = [
   { label: "Enfoque", href: "#enfoque" },
   { label: "Clientes", href: "#clientes" },
   { label: "Proyectos", href: "#proyectos" },
-  { label: "FAQ", href: "#faq" },
   { label: "Contacto", href: "#contacto" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const clients = [
