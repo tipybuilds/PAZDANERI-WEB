@@ -24,7 +24,21 @@ export default function Nav() {
           scrolled ? "py-3" : "py-5"
         }`}
       >
-        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 sm:px-8">
+        {/* Blurred backing so the menu never mixes with the content behind it */}
+        <div
+          aria-hidden
+          className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${
+            scrolled ? "opacity-100" : "opacity-0"
+          }`}
+          style={{
+            backdropFilter: "blur(24px) saturate(1.3)",
+            WebkitBackdropFilter: "blur(24px) saturate(1.3)",
+            background: "color-mix(in srgb, var(--bg) 72%, transparent)",
+            maskImage: "linear-gradient(to bottom, #000 70%, transparent)",
+            WebkitMaskImage: "linear-gradient(to bottom, #000 70%, transparent)",
+          }}
+        />
+        <div className="relative mx-auto flex max-w-[1600px] items-center justify-between px-5 sm:px-8">
           <a
             href="#inicio"
             className="font-serif text-lg tracking-tight"
@@ -46,7 +60,7 @@ export default function Nav() {
               blueOffset={16}
               brightness={60}
               opacity={0.9}
-              mixBlendMode="screen"
+              mixBlendMode="normal"
               className="px-2"
             >
               <nav className="flex items-center gap-7 px-5">
