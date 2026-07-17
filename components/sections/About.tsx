@@ -45,6 +45,27 @@ export default function About() {
               </p>
             </Reveal>
           </div>
+
+          <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-hair bg-[color-mix(in_srgb,var(--fg)_10%,transparent)] sm:grid-cols-3">
+            {[
+              { n: "07", label: "Marcas acompañadas" },
+              { n: "03", label: "Planes a medida" },
+              { n: "100%", label: "Foco orgánico" },
+            ].map((s, i) => (
+              <Reveal
+                key={s.label}
+                delay={i * 0.08}
+                className="bg-[var(--bg)] p-7 sm:p-9"
+              >
+                <p className="font-serif text-4xl font-light tracking-tight text-accent sm:text-5xl">
+                  {s.n}
+                </p>
+                <p className="mt-2 text-xs uppercase tracking-[0.18em] opacity-60">
+                  {s.label}
+                </p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

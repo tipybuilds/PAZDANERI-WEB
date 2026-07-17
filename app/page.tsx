@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Hero from "@/components/sections/Hero";
+import Ticker from "@/components/Ticker";
 import About from "@/components/sections/About";
 import Enfoque from "@/components/sections/Enfoque";
 import Clients from "@/components/sections/Clients";
@@ -17,6 +18,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <Ticker />
         <About />
         <Enfoque />
         <Clients />

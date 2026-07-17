@@ -83,6 +83,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Cursor />
+          <div className="grain" aria-hidden />
           <SmoothScroll>{children}</SmoothScroll>
         </ThemeProvider>
       </body>

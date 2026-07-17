@@ -25,6 +25,19 @@ export default function Hero() {
       className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden px-5 pb-12 pt-32 sm:px-8"
     >
       <motion.div style={{ y, opacity }} className="relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease, delay: 0.1 }}
+          className="mb-5 inline-flex items-center gap-2 rounded-full border border-hair px-4 py-2 text-[10px] uppercase tracking-[0.22em] opacity-80"
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+          </span>
+          Disponible para nuevos proyectos
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -98,14 +111,14 @@ export default function Hero() {
         </span>
       </motion.div>
 
-      {/* soft ambient gradient */}
+      {/* warm ambient glows */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-1/4 top-0 h-[60vh] w-[60vh] rounded-full opacity-30 blur-[120px]"
-        style={{
-          background:
-            "radial-gradient(circle, var(--fg) 0%, transparent 70%)",
-        }}
+        className="glow-accent -right-[15%] top-[-10%] h-[70vh] w-[70vh] opacity-[0.16]"
+      />
+      <div
+        aria-hidden
+        className="glow-accent -left-[20%] bottom-[-25%] h-[55vh] w-[55vh] opacity-[0.08]"
       />
     </section>
   );

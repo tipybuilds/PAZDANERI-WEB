@@ -73,6 +73,41 @@ html.lenis body {
   }
 }
 
+/* Film grain overlay: one static composited layer, no scroll cost. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Warm ambient glow — pure radial gradient, no filter: cheap to composite. */
+.glow-accent {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, #c8a96a 55%, transparent) 0%,
+    transparent 65%
+  );
+}
+
+/* Animated underline for large links. */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
 /* Blurred backing strip behind the fixed nav.
    On desktop we use a real backdrop blur; on mobile we swap to a solid
    background because backdrop-filter on a fixed element repaints every

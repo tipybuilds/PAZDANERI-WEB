@@ -25,22 +25,19 @@ export default function Contact() {
           <RevealText text="Hablemos." />
         </h2>
 
-        <div className="mt-16 border-t border-hair pt-10">
-          <div className="grid gap-10 sm:grid-cols-3">
-            <Reveal>
-              <p className="text-xs uppercase tracking-[0.18em] opacity-50">
-                Email
-              </p>
-              <a
-                href={`mailto:${site.email}`}
-                data-cursor-hover
-                className="mt-2 block text-lg transition-colors hover:text-accent"
-              >
-                {site.email}
-              </a>
-            </Reveal>
+        <Reveal delay={0.15}>
+          <a
+            href={`mailto:${site.email}`}
+            data-cursor-hover
+            className="link-underline mt-10 inline-block max-w-full break-words font-serif text-[clamp(1.4rem,4vw,3.5rem)] font-light italic tracking-tight opacity-90"
+          >
+            {site.email}
+          </a>
+        </Reveal>
 
-            <Reveal delay={0.08}>
+        <div className="mt-16 border-t border-hair pt-10">
+          <div className="grid gap-10 sm:grid-cols-2">
+            <Reveal>
               <p className="text-xs uppercase tracking-[0.18em] opacity-50">
                 WhatsApp
               </p>
@@ -49,7 +46,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor-hover
-                className="group mt-2 inline-flex items-center gap-2 text-lg transition-colors hover:text-accent"
+                className="group mt-3 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-[#1a1815] transition-transform duration-300 hover:scale-[1.03]"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -72,6 +69,12 @@ export default function Contact() {
           </div>
         </div>
       </div>
+
+      {/* warm ambient glow */}
+      <div
+        aria-hidden
+        className="glow-accent -bottom-[30%] -right-[10%] h-[60vh] w-[60vh] opacity-[0.12]"
+      />
     </section>
   );
 }
