@@ -1,16 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Cursor() {
   const [enabled, setEnabled] = useState(false);
   const [hovering, setHovering] = useState(false);
-
-  // Track the pointer 1:1 (no spring) so the dot is always exactly under
-  // the cursor — never lagging or feeling "stuck".
-  const x = useMotionValue(-100);
-  const y = useMotionValue(-100);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
@@ -19,31 +15,37 @@ export default function Cursor() {
     setEnabled(true);
     document.documentElement.classList.add("custom-cursor-active");
 
+    // Write the transform directly on the event: no rAF hop, no React
+    // re-render — the dot is under the pointer on the same frame even
+    // when other rAF loops (Lenis, marquees) are busy.
     function move(e: MouseEvent) {
-      x.set(e.clientX);
-      y.set(e.clientY);
+      const el = ref.current;
+      if (el) {
+        el.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      }
     }
     function over(e: MouseEvent) {
       const t = e.target as HTMLElement;
       setHovering(!!t.closest("a, button, [data-cursor-hover]"));
     }
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseover", over);
+    window.addEventListener("mousemove", move, { passive: true });
+    window.addEventListener("mouseover", over, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseover", over);
       document.documentElement.classList.remove("custom-cursor-active");
     };
-  }, [x, y]);
+  }, []);
 
   if (!enabled) return null;
 
   return (
-    <motion.div
+    <div
+      ref={ref}
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[9999] mix-blend-difference"
-      style={{ x, y }}
+      className="pointer-events-none fixed left-0 top-0 z-[9999] mix-blend-difference will-change-transform"
+      style={{ transform: "translate3d(-100px, -100px, 0)" }}
     >
       <motion.div
         className="rounded-full bg-white"
@@ -55,6 +57,6 @@ export default function Cursor() {
         }}
         transition={{ type: "spring", stiffness: 500, damping: 35, mass: 0.4 }}
       />
-    </motion.div>
+    </div>
   );
 }
